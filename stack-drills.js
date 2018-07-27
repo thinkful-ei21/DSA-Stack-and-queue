@@ -132,6 +132,48 @@ function matchAnyParan(str) {
   }
   return 'String is OK';
 }
-console.log(matchAnyParan('(){}[]')); // expect ok
-console.log(matchAnyParan('({)}')); // expect error at location 3, stating } is expected but got ) instead
-console.log(matchAnyParan('(((())]')); // expect error at location 3, stating } is expected but got ) instead
+// console.log(matchAnyParan('(){}[]')); // expect ok
+// console.log(matchAnyParan('({)}')); // expect error at location 3, stating } is expected but got ) instead
+// console.log(matchAnyParan('(((())]')); // expect error at location 3, stating } is expected but got ) instead
+
+// Sort Stack
+// Write a program to sort a stack such that the smallest items are on the top
+// (in ascending order).
+// You can use an additional stack,
+//  but you may not use any other data structure (such as an array, or linked list).
+
+function sortStack(ustack){
+  let currNode = ustack.top;
+  let nextNode = currNode.next;
+  let sorted = new Stack();
+  let highest = currNode.value;
+//////if currNode is < ustack.top move through the stack
+  while(currNode.value < nextNode.value){
+    currNode = currNode.next.value
+    //console.log(currNode);
+
+    nextNode = nextNode.next;
+  } ////determine highest value for stack 
+  if (currNode.value > nextNode.value){
+    highest = currNode.value
+  }
+  // if (highest == ustack.top.value){
+  //
+  // }
+
+  if(currNode ===  null){
+    return "stack sorted"
+  }
+  return highest;
+}
+
+let newstack = new Stack();
+
+newstack.push(1);
+newstack.push(2);
+newstack.push(5);
+newstack.push(10);
+newstack.push(4);
+newstack.push(7);
+newstack.push(4);
+console.log(sortStack(newstack));
