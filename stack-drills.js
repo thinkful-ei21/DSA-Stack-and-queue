@@ -60,7 +60,39 @@ function is_palindrome(str) {
 
   return str === newString;
 }
-console.log(is_palindrome('dad'));
-console.log(is_palindrome('A man, a plan, a canal: Panama'));
-console.log(is_palindrome('1001'));
-console.log(is_palindrome('Tauhida'));
+// console.log(is_palindrome('dad'));
+// console.log(is_palindrome('A man, a plan, a canal: Panama'));
+// console.log(is_palindrome('1001'));
+// console.log(is_palindrome('Tauhida'));
+
+function matchParan(str) {
+  const tempStack = new Stack();
+  // parse str
+  for (let i = 0; i < str.length; i ++) {
+    // push any '(' into a stack
+    if (str[i] === '(') {
+      tempStack.push(str[i]);
+    }
+    // if parsing finds a ')', we pop the stack
+    if (str[i] === ')') {
+      // and if string is closed before any opens are detected, meaning if we pop an empty stack, return 'error at location'
+      if (tempStack.top === null) {
+        return `Error: Close paranthesis found at column ${i}`;
+      } else {
+        tempStack.pop();
+      }
+    }
+  }
+  // by end of parsing, stack should be empty if str property opened/closed
+  // but if string is open, stack will have something in it, so return 'error, string opened
+  if (tempStack.top) {
+    return 'Error: string is open';
+  }
+  return 'String is OK';
+}
+
+console.log(matchParan('abc(d)e')); // expect 'string ok'
+console.log(matchParan('abc(de')); // expect 'error: string open'
+console.log(matchParan('abc)de')); // expect 'error: string closed at location column x'
+console.log(matchParan('abc(((d)e')); // expect 'error: string open'
+console.log(matchParan('abc(((d))))))e')); // expect 'error: string closed at column x'
