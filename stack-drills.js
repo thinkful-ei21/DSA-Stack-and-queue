@@ -9,8 +9,8 @@ starTrek.push('Spock');
 starTrek.push('McCoy');
 starTrek.push('Scotty');
 starTrek.push('Sulu');
-starTrek.push('data');
-starTrek.push('picard');
+starTrek.push('Data');
+starTrek.push('Picard');
 
 function peek(stack) {
   return stack.top.value;
@@ -27,40 +27,40 @@ function display(stack) {
   output.push(currNode.value);
   return output;
 }
-
-function searchremove(value,stack){
-  //
-  let node = stack.top
-  let i = 1;
-  while(node.value !== value){
-    node = node.next
-    i += 1;
-  }
-  for (let j = 0; j< i; j++){
-    stack.pop()
-  }
-
-}
-
-function is_palindrome(s) {
-    s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-    // your code goes here
-    const tempstack = new Stack();
-    let currNode = tempstack.top;
-    let newstring = '';
-    for(let i = 0; i < s.length; i++){
-       tempstack.push(s[i]);
-    }
-    console.log(display(tempstack));
-    while(currNode){
-       newstring = newstring + tempstack.pop();
-      currNode = currNode.next
-    }
-    console.log(newstring);
-    return s === newstring;
-}
-console.log(is_palindrome("dad"));
-
-//searchremove('McCoy',starTrek);
-
 // console.log(display(starTrek));
+
+function searchAndRemove(value, stack) {
+  let currNode = stack.top;
+  let i = 1;
+  while (currNode.value !== value) {
+    currNode = currNode.next;
+    i++;
+  }
+  for (let j = 0; j < i; j++){
+    stack.pop();
+  }
+}
+// searchAndRemove('McCoy', starTrek);
+// console.log(display(starTrek));
+
+function is_palindrome(str) {
+  str = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+
+  const tempStack = new Stack();
+  for (let i = 0; i < str.length; i++) {
+    tempStack.push(str[i]);
+  }
+
+  let currNode = tempStack.top;
+  let newString = '';
+  while (currNode) {
+    newString = newString + tempStack.pop();
+    currNode = currNode.next;
+  }
+
+  return str === newString;
+}
+console.log(is_palindrome('dad'));
+console.log(is_palindrome('A man, a plan, a canal: Panama'));
+console.log(is_palindrome('1001'));
+console.log(is_palindrome('Tauhida'));
